@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FiEdit2, FiArrowLeftCircle } from "react-icons/fi";
+import { FiEdit2, FiArrowLeft } from "react-icons/fi";
 import api from "../utils/api";
 import RecipeModal from "../components/RecipeModal";
 import axios from "axios";
@@ -75,7 +75,7 @@ const RecipeDetails = () => {
                     onClick={() => navigate('/')}
                     className="pb-2 rounded hover:bg-gray-300"
                 >
-                    <FiArrowLeftCircle size={28} />
+                    <FiArrowLeft size={28} />
                 </button>
                 {!isAdmin && (
                 <button

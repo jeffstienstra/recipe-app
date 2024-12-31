@@ -7,7 +7,7 @@ const RecipeSchema = new mongoose.Schema(
         cookTime: { type: Number, required: true },
         prepTime: { type: Number, required: true },
         rating: { type: Number, default: 0, max: 5 },
-        category: { type: String, enum: ['Appetizer', 'Breakfast', 'Dessert', 'Drink', 'Entree', 'Salad', 'Side', 'Snack'], required: true },
+        category: { type: String, enum: ['Appetizer', 'Breakfast', 'Dessert', 'Drink', 'Entree', 'Salad', 'Side'], required: true },
         ingredients: { type: [String], required: true },
         instructions: { type: String, required: true },
         image: { type: String, required: true },

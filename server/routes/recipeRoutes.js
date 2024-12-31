@@ -11,7 +11,6 @@ router.put('/:id', updateRecipe);
 
 router.get("/:id", async (req, res) => {
     try {
-        console.log('req.params', req.params);
         const recipe = await Recipe.findById(req.params.id);
         if (!recipe) return res.status(404).json({ message: "Recipe not found" });
         res.json(recipe);
