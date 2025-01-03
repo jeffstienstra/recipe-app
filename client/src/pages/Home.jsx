@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "../utils/api";
+import api from "../utils/api";
 import RecipeCard from "../components/RecipeCard";
 
 const Home = () => {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        axios.get("/recipes").then((res) => setRecipes(res.data));
+        api.get("/recipes").then((res) => setRecipes(res.data));
     }, []);
 
     return (
