@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Determine the base URL based on the environment
-const baseURL = import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+const baseURL = process.env.VITE_BASE_URL || "http://localhost:5000";
 
 const api = axios.create({
     baseURL: baseURL,
