@@ -1,9 +1,10 @@
 import axios from "axios";
 
-// Create an Axios instance with a base URL
+// Determine the base URL based on the environment
+const baseURL = import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+
 const api = axios.create({
-    // baseURL: "https://recipe-app-gjbw.onrender.com", // for production server
-    baseURL: "http://localhost:5173", // for localhost
+    baseURL: baseURL,
     headers: {
         "Content-Type": "application/json",
     },
