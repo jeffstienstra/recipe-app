@@ -2,7 +2,8 @@ import axios from "axios";
 
 // Create an Axios instance with a base URL
 const api = axios.create({
-    baseURL: "https://recipe-app-gjbw.onrender.com", // Adjust to match your backend URL
+    // baseURL: "https://recipe-app-gjbw.onrender.com", // for production server
+    baseURL: "http://localhost:5173", // for localhost
     headers: {
         "Content-Type": "application/json",
     },
