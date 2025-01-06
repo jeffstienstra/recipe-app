@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 // Routes
 app.get('/', (req, res) => res.send('API is running'));
 app.use('/api/auth', authRoutes);
+app.post('/api/recipes', recipeRoutes)
+app.delete('/api/recipes/:id', recipeRoutes)
 app.use('/api/recipes', recipeRoutes);
 
 const PORT = process.env.PORT || 5000;

@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const RecipeModal = ({ recipe, onSave, onClose }) => {
-    const [formData, setFormData] = useState({
-        _id: recipe._id || '',
+
+    const modalTitle = recipe === 'new' ? 'Create Recipe' : 'Edit Recipe';
+
+    const [formData, setFormData] = useState(
+        recipe === 'new' ? {
+            title: '',
+            description: '',
+            cookTime: '',
+            prepTime: '',
+            rating: '',
+            category: 'Entree',
+            ingredients: '',
+            instructions: '',
+            image: '',
+            notes: '',
+        } : {
         title: recipe.title || '',
         description: recipe.description || '',
         cookTime: recipe.cookTime || '',
         prepTime: recipe.prepTime || '',
         rating: recipe.rating || '',
-        category: recipe.category || '',
+        category: recipe.category || 'Entree',
         ingredients: recipe.ingredients.join(', ') || '',
         instructions: recipe.instructions || '',
         image: recipe.image || '',
@@ -31,7 +45,7 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center overflow-auto">
             <div className="bg-white p-6 rounded-lg shadow-lg w-1/2 min-w-[350px] max-h-[90vh] overflow-y-auto my-10">
-                <h2 className="text-2xl font-bold mb-4">Edit Recipe</h2>
+                <h2 className="text-2xl font-bold mb-4">{modalTitle}</h2>
                 <label htmlFor="title" className="block font-semibold">Title</label>
                 <input
                     type="text"

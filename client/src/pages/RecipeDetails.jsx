@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FiEdit2, FiArrowLeft } from "react-icons/fi";
+import { FiEdit2, FiArrowLeft, FiTrash2 } from "react-icons/fi";
 import api from "../utils/api";
 import RecipeModal from "../components/RecipeModal";
-import axios from "axios";
 
 const RecipeDetails = () => {
     const navigate = useNavigate();
@@ -15,6 +14,16 @@ const RecipeDetails = () => {
     const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
 
     const handleEdit = (recipe) => setEditingRecipe(recipe);
+
+    const handleDelete = (recipe) => {
+        api.delete(`/recipes/${recipe._id}`) // Ensure the correct backend URL
+        .then(() => {
+            navigate('/');
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+    };
 
     const handleSave = (updatedRecipe) => {
         api.put(`/recipes/${updatedRecipe._id}`, updatedRecipe) // Ensure the correct backend URL
@@ -78,12 +87,20 @@ const RecipeDetails = () => {
                     <FiArrowLeft size={28} />
                 </button>
                 {!isAdmin && (
-                <button
-                    onClick={() => handleEdit(recipe)}
-                    className="pb-2 hover:bg-gray-300"
-                    >
-                    <FiEdit2 size={24} />
-                </button>
+                    <div className="flex">
+                        <button
+                            onClick={() => handleEdit(recipe)}
+                            className="pb-2 hover:bg-gray-300"
+                            >
+                            <FiEdit2 size={24} />
+                        </button>
+                        <button
+                            onClick={() => handleDelete(recipe)}
+                            className="ml-4 pb-2 hover:bg-gray-300"
+                            >
+                            <FiTrash2 color='red' size={24} />
+                        </button>
+                    </div>
                 )}
             </div>
             <img
@@ -125,7 +142,6 @@ const RecipeDetails = () => {
                 recipe={editingRecipe}
                 onSave={handleSave}
                 onClose={() => setEditingRecipe(null)}
-                // onEdit={handleEdit}
                 isAdmin={isAdmin}
                 />
             )}
