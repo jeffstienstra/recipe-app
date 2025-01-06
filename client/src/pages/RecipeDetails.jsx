@@ -96,7 +96,7 @@ const RecipeDetails = () => {
                         </button>
                         <button
                             onClick={() => handleDelete(recipe)}
-                            className="ml-4 pb-2 hover:bg-gray-300"
+                            className="ml-8 pb-2 hover:bg-gray-300"
                             >
                             <FiTrash2 color='red' size={24} />
                         </button>
