@@ -17,17 +17,19 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
             image: '',
             notes: '',
         } : {
-        title: recipe.title || '',
-        description: recipe.description || '',
-        cookTime: recipe.cookTime || '',
-        prepTime: recipe.prepTime || '',
-        rating: recipe.rating || '',
-        category: recipe.category || 'Entree',
-        ingredients: recipe.ingredients.join(', ') || '',
-        instructions: recipe.instructions || '',
-        image: recipe.image || '',
-        notes: recipe.notes || '',
-    });
+            _id: recipe._id,
+            title: recipe.title || '',
+            description: recipe.description || '',
+            cookTime: recipe.cookTime || '',
+            prepTime: recipe.prepTime || '',
+            rating: recipe.rating || '',
+            category: recipe.category || 'Entree',
+            ingredients: recipe.ingredients.join(', ') || '',
+            instructions: recipe.instructions || '',
+            image: recipe.image || '',
+            notes: recipe.notes || '',
+        }
+    );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
