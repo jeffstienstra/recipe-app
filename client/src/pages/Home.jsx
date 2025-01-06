@@ -39,7 +39,6 @@ const Home = () => {
     });
 
     const handleSave = (newRecipe) => {
-        console.log('newRecipe:', newRecipe);
         api.post('/recipes/', newRecipe) // Ensure the correct backend URL
         .then(() => {
             fetchRecipes();

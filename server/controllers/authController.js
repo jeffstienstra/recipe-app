@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 exports.login = async (req, res) => {
-console.log('login route hit');
+console.log('login route hit...');
     const { email, password } = req.body;
 
     try {

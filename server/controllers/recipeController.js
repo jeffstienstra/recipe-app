@@ -2,7 +2,6 @@ const Recipe = require('../models/Recipe');
 
 exports.getRecipe = async (req, res) => {
     console.log('getRecipe controller hit...');
-    console.log('req.params.id:', req.params.id);
     try {
         const recipe = await Recipe.findById(req.params.id);
         if (!recipe) return res.status(404).json({ message: "Recipe not found" });
@@ -25,11 +24,9 @@ exports.getAllRecipes = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
     console.log('createRecipe controller hit...');
-    console.log('req.body:', req.body);
     try {
         const newRecipe = new Recipe(req.body);
         const savedRecipe = await newRecipe.save();
-        console.log('savedRecipe:', savedRecipe);
         res.status(201).json(savedRecipe);
     } catch (err) {
         console.error('Error saving recipe:', err);
@@ -38,6 +35,7 @@ exports.createRecipe = async (req, res) => {
 };
 
 exports.updateRecipe = async (req, res) => {
+    console.log('updateRecipe controller hit...');
     try {
         const recipe = await Recipe.findByIdAndUpdate
         (req.params.id, req.body, { new: true });
@@ -54,6 +52,7 @@ exports.updateRecipe = async (req, res) => {
 };
 
 exports.deleteRecipe = async (req, res) => {
+    console.log('deleteRecipe controller hit...');
     try {
         const recipe = await Recipe.findByIdAndDelete(req.params.id);
 
