@@ -4,3 +4,4 @@ node_modules
 dist/
 build/
 *.rest
+server/scripts/insertSampleDataToRemoteDb.js
