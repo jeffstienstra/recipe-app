@@ -12,22 +12,43 @@ const RecipeDetails = () => {
     const [error, setError] = useState(null);
     const [editingRecipe, setEditingRecipe] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [recipeToDelete, setRecipeToDelete] = useState(null);
 
     const handleEdit = (recipe) => setEditingRecipe(recipe);
 
+    // const handleDelete = (recipe) => {
+    //     api.delete(`/recipes/${recipe._id}`) // Ensure the correct backend URL
+    //     .then(() => {
+    //         navigate('/');
+    //     })
+    //     .catch((err) => {
+    //         console.error(err);
+    //     });
+    // };
+
     const handleDelete = (recipe) => {
-        api.delete(`/recipes/${recipe._id}`) // Ensure the correct backend URL
+        setRecipeToDelete(recipe);
+        setIsDeleteModalOpen(true);
+    };
+
+    const confirmDelete = () => {
+        api.delete(`/recipes/${recipeToDelete._id}`) // Ensure the correct backend URL
         .then(() => {
             navigate('/');
         })
         .catch((err) => {
             console.error(err);
+        })
+        .finally(() => {
+            setIsDeleteModalOpen(false);
+            setRecipeToDelete(null);
         });
     };
 
     const handleSave = (updatedRecipe) => {
         api.put(`/recipes/${updatedRecipe._id}`, updatedRecipe) // Ensure the correct backend URL
-        .then((res) => {
+        .then(() => {
             setRecipe(updatedRecipe);
             setEditingRecipe(null);
         })
@@ -144,6 +165,28 @@ const RecipeDetails = () => {
                 onClose={() => setEditingRecipe(null)}
                 isAdmin={isAdmin}
                 />
+            )}
+            {isDeleteModalOpen && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
+                        <p>Are you sure you want to delete this recipe?</p>
+                        <div className="flex justify-end mt-4">
+                            <button
+                                onClick={() => setIsDeleteModalOpen(false)}
+                                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                className="bg-red-500 text-white px-4 py-2 rounded"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
