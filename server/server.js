@@ -16,8 +16,8 @@ const allowedOrigins = [
     'http://localhost:5174',
     'http://localhost:3000',
     'https://recipe-app-client-m0rb.onrender.com',
-    'https://www.justgivemetherecipe.com/',
-    'https://justgivemetherecipe.com/',
+    'https://www.justgivemetherecipe.com',
+    'https://justgivemetherecipe.com',
 ];
 app.use(cors({
     origin: function (origin, callback) {
