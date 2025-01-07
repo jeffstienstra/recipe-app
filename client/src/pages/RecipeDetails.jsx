@@ -99,8 +99,8 @@ const RecipeDetails = () => {
     }
 
     return (
-        <div className="p-10 max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
-            <div className="flex justify-between text-gray-700">
+        <div className="mt-12 p-10 max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+            <div className="flex justify-between mb-4 text-gray-700">
                 <button
                     onClick={() => navigate('/')}
                     className="pb-2 rounded hover:bg-gray-300"

@@ -46,7 +46,7 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center overflow-auto">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-1/2 min-w-[350px] max-h-[90vh] overflow-y-auto my-10">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-1/2 min-w-[350px] max-h-fit overflow-y-auto my-10">
                 <h2 className="text-2xl font-bold mb-4">{modalTitle}</h2>
                 <label htmlFor="title" className="block font-semibold">Title</label>
                 <input
