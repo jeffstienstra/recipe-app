@@ -99,7 +99,7 @@ const RecipeDetails = () => {
     }
 
     return (
-        <div className="mt-12 p-10 max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+        <div className="mt-0 p-10 max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
             <div className="flex justify-between mb-4 text-gray-700">
                 <button
                     onClick={() => navigate('/')}

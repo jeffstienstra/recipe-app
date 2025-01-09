@@ -55,7 +55,7 @@ const Home = () => {
     };
 
     return (
-        <div className="p-6">
+        <div className="px-6">
             <div className="header-container flex items-center justify-between mb-6">
                 <div className="flex">
                 <input

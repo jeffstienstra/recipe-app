@@ -16,4 +16,5 @@ textarea {
 
 body {
     @apply bg-gray-100;
+    padding: 20px;
 }
