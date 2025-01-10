@@ -70,34 +70,8 @@ const Home = () => {
                         onChange={handleSearchChange}
                     />
                 </div>
-                {/* <Button as={Fragment}>
-                    {({ hover }) => (
-                        <button
-                            onClick={handleAdd}
-                            className={clsx(hover && 'shadow-md bg-gray-100')}
-                        >
-                            <FiPlusSquare size="30" color="rgb(59, 130, 246, 1)" />
-                        </button>
-                    )}
-                </Button> */}
-                <Button className="rounded-full hover:shadow-md hover:bg-gray-50" onClick={handleAdd}>
-                    <svg
-                        stroke="currentColor"
-                        fill="none"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        color="rgb(59, 130, 246, 1)"
-                        height="30"
-                        width="30"
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{ color: 'rgb(59, 130, 246)' }}
-                    >
-                        <circle cx="12" cy="12" r="11"></circle>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
+                <Button className="rounded-full hover:shadow-md" onClick={handleAdd}>
+                    <FiPlusCircle size="30" color="rgb(59, 130, 246, 1)" />
                 </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
