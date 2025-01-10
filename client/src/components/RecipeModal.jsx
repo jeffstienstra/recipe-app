@@ -56,6 +56,7 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
                     onChange={handleChange}
                     placeholder="Title"
                     className="mb-4 w-full p-2 border rounded"
+                    autoFocus
                 />
                 <label htmlFor="description" className="block font-semibold">Description</label>
                 <textarea
