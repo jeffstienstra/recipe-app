@@ -11,9 +11,22 @@ const Home = () => {
     const [recipes, setRecipes] = useState([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isFetchingData, setIsFetchingData] = useState(false);
 
     function fetchRecipes() {
-        api.get("/recipes").then((res) => setRecipes(res.data));
+        setIsFetchingData(true);
+        // simulate slow data fetch
+        setTimeout(() => {
+            api.get('/recipes/') // Ensure the correct backend URL
+            .then((res) => {
+                setRecipes(res.data);
+                setIsFetchingData(false);
+            })
+            .catch((err) => {
+                console.error(err);
+                setIsFetchingData(false);
+            });
+        }, 10000);
     }
 
     useEffect(() => {
@@ -74,14 +87,21 @@ const Home = () => {
                         <FiPlusCircle size="30" color="rgb(59, 130, 246, 1)" />
                     </Button>
                 </div>
-                <div className="grid">
-                    {filteredRecipes?.map((recipe) => (
-                        <RecipeCard
-                            key={recipe._id}
-                            recipe={recipe}
-                        />
-                    ))}
-                </div>
+                {isFetchingData ? (
+                    <div className="flex-center my-20">
+                        <h1 className="mb-2 text-center text-2xl text-white">Please wait</h1>
+                        <p className="text-center text-white">We&apos;re gently waking up the database. We save energy by letting it sleep when nobody comes to visit. It sounds like a sad existence, but databases don&apos;t mind. :)</p>
+                    </div>
+                ) : (
+                    <div className="grid">
+                        {filteredRecipes?.map((recipe) => (
+                            <RecipeCard
+                                key={recipe._id}
+                                recipe={recipe}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
             {isCreateModalOpen && (
                 <RecipeModal
