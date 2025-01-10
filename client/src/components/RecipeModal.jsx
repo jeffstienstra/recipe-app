@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import './RecipeModal.css';
 
 const RecipeModal = ({ recipe, onSave, onClose }) => {
-
     const modalTitle = recipe === 'new' ? 'Create Recipe' : 'Edit Recipe';
 
     const [formData, setFormData] = useState(
@@ -45,60 +45,60 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center overflow-auto">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-1/2 min-w-[350px] max-h-fit overflow-y-auto my-10">
-                <h2 className="text-2xl font-bold mb-4">{modalTitle}</h2>
-                <label htmlFor="title" className="block font-semibold">Title</label>
+        <div className="recipe-modal-container modal-overlay">
+            <div className="modal-content">
+                <h2 className="modal-title">{modalTitle}</h2>
+                <label htmlFor="title" className="label">Title</label>
                 <input
                     type="text"
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
                     placeholder="Title"
-                    className="mb-4 w-full p-2 border rounded"
+                    className="input"
                     autoFocus
                 />
-                <label htmlFor="description" className="block font-semibold">Description</label>
+                <label htmlFor="description" className="label">Description</label>
                 <textarea
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
                     placeholder="Description"
-                    className="w-full min-h-16 p-2 border rounded"
+                    className="textarea"
                 />
-                <label htmlFor="cookTime" className="block font-semibold">Cook Time</label>
+                <label htmlFor="cookTime" className="label">Cook Time</label>
                 <input
                     type="number"
                     name="cookTime"
                     value={formData.cookTime}
                     onChange={handleChange}
                     placeholder="Cook Time"
-                    className="w-full p-2 border rounded"
+                    className="input"
                 />
-                <label htmlFor="prepTime" className="block font-semibold">Prep Time</label>
+                <label htmlFor="prepTime" className="label">Prep Time</label>
                 <input
                     type="number"
                     name="prepTime"
                     value={formData.prepTime}
                     onChange={handleChange}
                     placeholder="Prep Time"
-                    className="w-full p-2 border rounded"
+                    className="input"
                 />
-                <label htmlFor="rating" className="block font-semibold">Rating</label>
+                <label htmlFor="rating" className="label">Rating</label>
                 <input
                     type="number"
                     name="rating"
                     value={formData.rating}
                     onChange={handleChange}
                     placeholder="Rating"
-                    className="w-full p-2 border rounded"
+                    className="input"
                 />
-                <label htmlFor="category" className="block font-semibold">Category</label>
+                <label htmlFor="category" className="label">Category</label>
                 <select
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full p-2 border rounded"
+                    className="select"
                 >
                     <option value="">Select Category</option>
                     <option value="Appetizer">Appetizer</option>
@@ -109,49 +109,49 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
                     <option value="Salad">Salad</option>
                     <option value="Side">Side</option>
                 </select>
-                <label htmlFor="ingredients" className="block font-semibold">Ingredients</label>
+                <label htmlFor="ingredients" className="label">Ingredients</label>
                 <textarea
                     name="ingredients"
                     value={formData.ingredients}
                     onChange={handleChange}
                     placeholder="Ingredients (comma separated)"
-                    className="w-full p-2 border rounded"
+                    className="textarea"
                 />
-                <label htmlFor="instructions" className="block font-semibold">Instructions</label>
+                <label htmlFor="instructions" className="label">Instructions</label>
                 <textarea
                     name="instructions"
                     value={formData.instructions}
                     onChange={handleChange}
                     placeholder="Instructions"
-                    className="w-full p-2 border rounded"
+                    className="textarea"
                 />
-                <label htmlFor="image" className="block font-semibold">Image</label>
+                <label htmlFor="image" className="label">Image</label>
                 <input
                     type="text"
                     name="image"
                     value={formData.image}
                     onChange={handleChange}
                     placeholder="Image URL"
-                    className="w-full p-2 border rounded"
+                    className="input"
                 />
-                <label htmlFor="notes" className="block font-semibold">Notes</label>
+                <label htmlFor="notes" className="label">Notes</label>
                 <textarea
                     name="notes"
                     value={formData.notes}
                     onChange={handleChange}
                     placeholder="Notes"
-                    className="w-full p-2 border rounded"
+                    className="textarea"
                 />
-                <div className="flex justify-end mt-4">
+                <div className="button-container">
                     <button
                         onClick={onClose}
-                        className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                        className="button button-cancel"
                     >
                         Cancel
                     </button>
                     <button
                         onClick={handleSave}
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                        className="button button-save"
                     >
                         Save
                     </button>

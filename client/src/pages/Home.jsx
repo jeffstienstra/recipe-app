@@ -1,11 +1,10 @@
+import './Home.css';
 import { useEffect, useState } from "react";
-import { FiPlusSquare, FiPlusCircle } from "react-icons/fi";
+import { FiPlusCircle } from "react-icons/fi";
 import api from "../utils/api";
 import RecipeCard from "../components/RecipeCard";
 import RecipeModal from '../components/RecipeModal';
 import { Button, Input } from '@headlessui/react'
-import clsx from 'clsx'
-import { Fragment } from 'react'
 
 const Home = () => {
     const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
@@ -55,32 +54,34 @@ const Home = () => {
 
     const handleCloseModal = () => {
         setIsCreateModalOpen(false);
-        document.activeElement.blur();
+        document.querySelector('#focus-reset').focus();
     };
 
     return (
-        <div className="px-6">
-            <div className="header-container flex items-center justify-between mb-6">
-                <div className="flex">
-                <Input
-                        className="rounded-lg mb-0 px-3 border data-[hover]:shadow data-[focus]:bg-gray-50"
-                        type="text"
-                        placeholder="Search"
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                    />
+        <div className="home-container">
+            <div className={(isCreateModalOpen) ? 'blur-background' : ''}>
+                <div className="header-container">
+                    <div id='focus-reset' tabIndex="-1" className="focus-reset">
+                        <Input
+                            className="input"
+                            type="text"
+                            placeholder="Search"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
+                    </div>
+                    <Button className="button" onClick={handleAdd}>
+                        <FiPlusCircle size="30" color="rgb(59, 130, 246, 1)" />
+                    </Button>
                 </div>
-                <Button className="rounded-full hover:shadow-md" onClick={handleAdd}>
-                    <FiPlusCircle size="30" color="rgb(59, 130, 246, 1)" />
-                </Button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredRecipes?.map((recipe) => (
-                <RecipeCard
-                    key={recipe._id}
-                    recipe={recipe}
-                />
-                ))}
+                <div className="grid">
+                    {filteredRecipes?.map((recipe) => (
+                        <RecipeCard
+                            key={recipe._id}
+                            recipe={recipe}
+                        />
+                    ))}
+                </div>
             </div>
             {isCreateModalOpen && (
                 <RecipeModal

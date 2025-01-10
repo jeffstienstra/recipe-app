@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FiEdit2, FiArrowLeft, FiTrash2 } from "react-icons/fi";
 import api from "../utils/api";
 import RecipeModal from "../components/RecipeModal";
+import './RecipeDetails.css';
 
 const RecipeDetails = () => {
     const navigate = useNavigate();
@@ -16,16 +17,6 @@ const RecipeDetails = () => {
     const [recipeToDelete, setRecipeToDelete] = useState(null);
 
     const handleEdit = (recipe) => setEditingRecipe(recipe);
-
-    // const handleDelete = (recipe) => {
-    //     api.delete(`/recipes/${recipe._id}`) // Ensure the correct backend URL
-    //     .then(() => {
-    //         navigate('/');
-    //     })
-    //     .catch((err) => {
-    //         console.error(err);
-    //     });
-    // };
 
     const handleDelete = (recipe) => {
         setRecipeToDelete(recipe);
@@ -76,7 +67,7 @@ const RecipeDetails = () => {
 
     if (loading) {
         return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex-center">
             <p>Loading...</p>
         </div>
         );
@@ -84,103 +75,105 @@ const RecipeDetails = () => {
 
     if (error) {
         return (
-        <div className="flex items-center justify-center min-h-screen">
-            <p className="text-red-500">{error}</p>
+        <div className="flex-center">
+            <p className="text-red">{error}</p>
         </div>
         );
     }
 
     if (!recipe) {
         return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex-center">
             <p>No recipe found.</p>
         </div>
         );
     }
 
     return (
-        <div className="mt-0 p-10 max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
-            <div className="flex justify-between mb-4 text-gray-700">
-                <button
-                    onClick={() => navigate('/')}
-                    className="pb-2 rounded hover:bg-gray-300"
-                >
-                    <FiArrowLeft size={28} />
-                </button>
-                {!isAdmin && (
-                    <div className="flex">
-                        <button
-                            onClick={() => handleEdit(recipe)}
-                            className="pb-2 hover:bg-gray-300"
+        <div className="recipe-details">
+            <div className={(isDeleteModalOpen || editingRecipe) ? 'blur-background' : ''}>
+                <div className="header">
+                    <button
+                        onClick={() => navigate('/')}
+                        className="button-back"
+                    >
+                        <FiArrowLeft size={28} />
+                    </button>
+                    {!isAdmin && (
+                        <div className="actions">
+                            <button
+                                onClick={() => handleEdit(recipe)}
+                                className="button-edit"
                             >
-                            <FiEdit2 size={24} />
-                        </button>
-                        <button
-                            onClick={() => handleDelete(recipe)}
-                            className="ml-8 pb-2 hover:bg-gray-300"
+                                <FiEdit2 size={24} />
+                            </button>
+                            <button
+                                onClick={() => handleDelete(recipe)}
+                                className="button-delete"
                             >
-                            <FiTrash2 color='red' size={24} />
-                        </button>
+                                <FiTrash2 color='red' size={24} />
+                            </button>
+                        </div>
+                    )}
+                </div>
+                <img
+                    src={recipe.image}
+                    alt={recipe.title}
+                    className="image"
+                />
+                <h1 className="title">{recipe.title}</h1>
+                <p className="description">{recipe.description}</p>
+
+                <div className="details">
+                    <div>
+                        <p className="label">Prep Time</p>
+                        <p className="value">{recipe.prepTime} mins</p>
                     </div>
-                )}
+                    <div>
+                        <p className="label">Cook Time</p>
+                        <p className="value">{recipe.cookTime} mins</p>
+                    </div>
+                    <div>
+                        <p className="label">Category</p>
+                        <p className="value">{recipe.category}</p>
+                    </div>
+                </div>
+
+                <h2 className="subtitle">Ingredients</h2>
+                <ul className="ingredients">
+                    {recipe.ingredients.map((ingredient, index) => (
+                        <li key={index}>
+                            {ingredient}
+                        </li>
+                    ))}
+                </ul>
+
+                <h2 className="subtitle">Instructions</h2>
+                <p className="instructions">{recipe.instructions}</p>
             </div>
-            <img
-                src={recipe.image}
-                alt={recipe.title}
-                className="w-full h-64 object-cover rounded-lg mb-6"
-            />
-            <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
-            <p className="text-gray-600 mb-6">{recipe.description}</p>
-
-            <div className="flex justify-between mb-6">
-                <div>
-                <p className="text-sm text-gray-500">Prep Time</p>
-                <p className="font-bold">{recipe.prepTime} mins</p>
-                </div>
-                <div>
-                <p className="text-sm text-gray-500">Cook Time</p>
-                <p className="font-bold">{recipe.cookTime} mins</p>
-                </div>
-                <div>
-                <p className="text-sm text-gray-500">Category</p>
-                <p className="font-bold">{recipe.category}</p>
-                </div>
-            </div>
-
-            <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
-            <ul className="list-disc list-inside mb-6">
-                {recipe.ingredients.map((ingredient, index) => (
-                <li key={index} className="text-gray-700">
-                    {ingredient}
-                </li>
-                ))}
-            </ul>
-
-            <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
-            <p className="text-gray-700 whitespace-pre-line">{recipe.instructions}</p>
             {editingRecipe && (
                 <RecipeModal
-                recipe={editingRecipe}
-                onSave={handleSave}
-                onClose={() => setEditingRecipe(null)}
-                isAdmin={isAdmin}
+                    recipe={editingRecipe}
+                    onSave={handleSave}
+                    onClose={() => setEditingRecipe(null)}
+                    isAdmin={isAdmin}
                 />
             )}
             {isDeleteModalOpen && (
-                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h2 className="modal-title">Confirm Deletion</h2>
                         <p>Are you sure you want to delete this recipe?</p>
-                        <div className="flex justify-end mt-4">
+                        <div className="modal-buttons">
                             <button
                                 onClick={() => setIsDeleteModalOpen(false)}
-                                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                                className="button-cancel"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={confirmDelete}
-                                className="bg-red-500 text-white px-4 py-2 rounded"
+                                className="button-confirm-delete"
                             >
                                 Delete
                             </button>

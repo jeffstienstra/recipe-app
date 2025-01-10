@@ -1,0 +1,74 @@
+.recipe-modal-container {
+    color: white;
+
+    .modal-content {
+        background-color: #191919;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 50%;
+        min-width: 350px;
+        max-height: fit-content;
+        overflow-y: auto;
+        margin: 2.5rem 0;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .label {
+        display: block;
+        font-weight: 600;
+    }
+
+    .input, .textarea, .select {
+        background-color: #374151;
+        margin-bottom: 1rem;
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #4b5563;
+        border-radius: 0.25rem;
+    }
+
+    .textarea {
+        min-height: 4rem;
+    }
+
+    .button {
+        background-color: #374151;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        margin-right: 0.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #4b5563;
+    }
+
+    .button-save {
+        background-color: #3b82f6;
+    }
+
+    .button-save:hover {
+        background-color: #2563eb;
+    }
+
+    .button-cancel {
+        background-color: #6b7280;
+    }
+
+    .button-cancel:hover {
+        background-color: #4b5563;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+    }
+}
