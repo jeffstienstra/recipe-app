@@ -45,114 +45,118 @@ const RecipeModal = ({ recipe, onSave, onClose }) => {
     };
 
     return (
-        <div className="recipe-modal-container modal-overlay">
-            <div className="modal-content">
-                <h2 className="modal-title">{modalTitle}</h2>
-                <label htmlFor="title" className="label">Title</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    placeholder="Title"
-                    className="input"
-                    autoFocus
-                />
-                <label htmlFor="description" className="label">Description</label>
-                <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Description"
-                    className="textarea"
-                />
-                <label htmlFor="cookTime" className="label">Cook Time</label>
-                <input
-                    type="number"
-                    name="cookTime"
-                    value={formData.cookTime}
-                    onChange={handleChange}
-                    placeholder="Cook Time"
-                    className="input"
-                />
-                <label htmlFor="prepTime" className="label">Prep Time</label>
-                <input
-                    type="number"
-                    name="prepTime"
-                    value={formData.prepTime}
-                    onChange={handleChange}
-                    placeholder="Prep Time"
-                    className="input"
-                />
-                <label htmlFor="rating" className="label">Rating</label>
-                <input
-                    type="number"
-                    name="rating"
-                    value={formData.rating}
-                    onChange={handleChange}
-                    placeholder="Rating"
-                    className="input"
-                />
-                <label htmlFor="category" className="label">Category</label>
-                <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    className="select"
-                >
-                    <option value="">Select Category</option>
-                    <option value="Appetizer">Appetizer</option>
-                    <option value="Breakfast">Breakfast</option>
-                    <option value="Dessert">Dessert</option>
-                    <option value="Drink">Drink</option>
-                    <option value="Entree">Entree</option>
-                    <option value="Salad">Salad</option>
-                    <option value="Side">Side</option>
-                </select>
-                <label htmlFor="ingredients" className="label">Ingredients</label>
-                <textarea
-                    name="ingredients"
-                    value={formData.ingredients}
-                    onChange={handleChange}
-                    placeholder="Ingredients (comma separated)"
-                    className="textarea"
-                />
-                <label htmlFor="instructions" className="label">Instructions</label>
-                <textarea
-                    name="instructions"
-                    value={formData.instructions}
-                    onChange={handleChange}
-                    placeholder="Instructions"
-                    className="textarea"
-                />
-                <label htmlFor="image" className="label">Image</label>
-                <input
-                    type="text"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleChange}
-                    placeholder="Image URL"
-                    className="input"
-                />
-                <label htmlFor="notes" className="label">Notes</label>
-                <textarea
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                    placeholder="Notes"
-                    className="textarea"
-                />
-                <div className="button-container">
+        <div className="recipe-modal-overlay">
+            <div className="recipe-modal">
+                <div className="modal-header">
+                    <h2 className="modal-title">{modalTitle}</h2>
+                </div>
+                <div className="modal-content">
+                    <label htmlFor="title" className="label">Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleChange}
+                        placeholder="Title"
+                        className="input"
+                        autoFocus
+                    />
+                    <label htmlFor="description" className="label">Description</label>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder="Description"
+                        className="textarea"
+                    />
+                    <label htmlFor="cookTime" className="label">Cook Time</label>
+                    <input
+                        type="number"
+                        name="cookTime"
+                        value={formData.cookTime}
+                        onChange={handleChange}
+                        placeholder="Cook Time"
+                        className="input"
+                    />
+                    <label htmlFor="prepTime" className="label">Prep Time</label>
+                    <input
+                        type="number"
+                        name="prepTime"
+                        value={formData.prepTime}
+                        onChange={handleChange}
+                        placeholder="Prep Time"
+                        className="input"
+                    />
+                    <label htmlFor="rating" className="label">Rating</label>
+                    <input
+                        type="number"
+                        name="rating"
+                        value={formData.rating}
+                        onChange={handleChange}
+                        placeholder="Rating"
+                        className="input"
+                    />
+                    <label htmlFor="category" className="label">Category</label>
+                    <select
+                        name="category"
+                        value={formData.category}
+                        onChange={handleChange}
+                        className="select"
+                    >
+                        <option value="">Select Category</option>
+                        <option value="Appetizer">Appetizer</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Drink">Drink</option>
+                        <option value="Entree">Entree</option>
+                        <option value="Salad">Salad</option>
+                        <option value="Side">Side</option>
+                    </select>
+                    <label htmlFor="ingredients" className="label">Ingredients</label>
+                    <textarea
+                        name="ingredients"
+                        value={formData.ingredients}
+                        onChange={handleChange}
+                        placeholder="Ingredients (comma separated)"
+                        className="textarea"
+                    />
+                    <label htmlFor="instructions" className="label">Instructions</label>
+                    <textarea
+                        name="instructions"
+                        value={formData.instructions}
+                        onChange={handleChange}
+                        placeholder="Instructions"
+                        className="textarea"
+                    />
+                    <label htmlFor="image" className="label">Image</label>
+                    <input
+                        type="text"
+                        name="image"
+                        value={formData.image}
+                        onChange={handleChange}
+                        placeholder="Image URL"
+                        className="input"
+                    />
+                    <label htmlFor="notes" className="label">Notes</label>
+                    <textarea
+                        name="notes"
+                        value={formData.notes}
+                        onChange={handleChange}
+                        placeholder="Notes"
+                        className="textarea"
+                    />
+                </div>
+                <div className="modal-footer">
                     <button
                         onClick={onClose}
                         className="button button-cancel"
-                    >
+                        >
                         Cancel
                     </button>
                     <button
                         onClick={handleSave}
                         className="button button-save"
-                    >
+                        >
                         Save
                     </button>
                 </div>

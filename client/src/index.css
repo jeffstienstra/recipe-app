@@ -1,20 +1,141 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+    /* color: white; */
+    /* background-color: #121212; */
 
-input {
-    @apply mb-4;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1a202c;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+/*
+h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+h5 {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+}
+
+h6 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+} */
+
+p {
+    margin: 0;
+}
+
+a {
+    color: #3182ce;
+    text-decoration: none;
+}
+
+/* a:hover {
+    color: #2b6cb0;
+    text-decoration: underline;
+} */
+
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    box-sizing: border-box;
+	padding: .5rem .5rem;
+	border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+}
+
+/* add box-shadow hover effect for all the above elements */
+input, textarea, select, button {
+    transition: box-shadow 0.3s ease;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+input:hover, button:hover, .button:hover {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+button, .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+	background-color: #3b82f6;
+	color: white;
+}
+
+.button-square {
+    padding: 0.5rem;
+}
+
+.button-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 100%
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* input {
+    margin-bottom: .5rem;
 }
 
 select {
-    @apply mb-4;
+    margin-bottom: .5rem;
 }
 
 textarea {
-    @apply mb-4;
+    margin-bottom: .5rem;
 }
 
 body {
     background-color: #121212;
-    padding: 20px;
+} */
+
+.blur-background {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }

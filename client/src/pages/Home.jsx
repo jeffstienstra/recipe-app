@@ -1,6 +1,6 @@
 import './Home.css';
 import { useEffect, useState } from "react";
-import { FiPlusCircle } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import api from "../utils/api";
 import RecipeCard from "../components/RecipeCard";
 import RecipeModal from '../components/RecipeModal';
@@ -15,18 +15,16 @@ const Home = () => {
 
     function fetchRecipes() {
         setIsFetchingData(true);
-        // simulate slow data fetch
-        setTimeout(() => {
-            api.get('/recipes/') // Ensure the correct backend URL
-            .then((res) => {
-                setRecipes(res.data);
-                setIsFetchingData(false);
-            })
-            .catch((err) => {
-                console.error(err);
-                setIsFetchingData(false);
-            });
-        }, 10000);
+
+        api.get('/recipes/') // Ensure the correct backend URL
+        .then((res) => {
+            setRecipes(res.data);
+            setIsFetchingData(false);
+        })
+        .catch((err) => {
+            console.error(err);
+            setIsFetchingData(false);
+        });
     }
 
     useEffect(() => {
@@ -83,14 +81,12 @@ const Home = () => {
                             onChange={handleSearchChange}
                         />
                     </div>
-                    <Button className="button" onClick={handleAdd}>
-                        <FiPlusCircle size="30" color="rgb(59, 130, 246, 1)" />
-                    </Button>
+                    <Button className='button-square' onClick={handleAdd}><FiPlus size={24} /></Button>
                 </div>
                 {isFetchingData ? (
                     <div className="flex-center my-20">
-                        <h1 className="mb-2 text-center text-2xl text-white">Please wait</h1>
-                        <p className="text-center text-white">We&apos;re gently waking up the database. We save energy by letting it sleep when nobody comes to visit. It sounds like a sad existence, but databases don&apos;t mind. :)</p>
+                        <h1 className="">Please wait</h1>
+                        <p className="">We&apos;re gently waking up the database. We save energy by letting it sleep when nobody comes to visit. It sounds like a sad existence, but databases don&apos;t mind. :)</p>
                     </div>
                 ) : (
                     <div className="grid">

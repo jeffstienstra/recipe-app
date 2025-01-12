@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiEdit2, FiArrowLeft, FiTrash2 } from "react-icons/fi";
 import api from "../utils/api";
 import RecipeModal from "../components/RecipeModal";
 import './RecipeDetails.css';
+import {Button} from "@headlessui/react";
 
 const RecipeDetails = () => {
     const navigate = useNavigate();
@@ -11,12 +12,12 @@ const RecipeDetails = () => {
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [editingRecipe, setEditingRecipe] = useState(false);
+    const [recipeToEdit, setRecipeToEdit] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [recipeToDelete, setRecipeToDelete] = useState(null);
 
-    const handleEdit = (recipe) => setEditingRecipe(recipe);
+    const handleEdit = (recipe) => setRecipeToEdit(recipe);
 
     const handleDelete = (recipe) => {
         setRecipeToDelete(recipe);
@@ -41,11 +42,11 @@ const RecipeDetails = () => {
         api.put(`/recipes/${updatedRecipe._id}`, updatedRecipe) // Ensure the correct backend URL
         .then(() => {
             setRecipe(updatedRecipe);
-            setEditingRecipe(null);
+            setRecipeToEdit(null);
         })
         .catch((err) => {
             console.error(err);
-            setEditingRecipe(null);
+            setRecipeToEdit(null);
         });
     };
 
@@ -91,96 +92,100 @@ const RecipeDetails = () => {
 
     return (
         <div className="recipe-details">
-            <div className={(isDeleteModalOpen || editingRecipe) ? 'blur-background' : ''}>
-                <div className="header">
-                    <button
+            <div className={(isDeleteModalOpen || recipeToEdit) ? 'blur-background' : ''}>
+                <div className="recipe-detail-header">
+                    <Button
                         onClick={() => navigate('/')}
-                        className="button-back"
+                        className="button button-square"
                     >
-                        <FiArrowLeft size={28} />
-                    </button>
+                        <FiArrowLeft size={24} />
+                    </Button>
                     {!isAdmin && (
                         <div className="actions">
-                            <button
+                            <Button
                                 onClick={() => handleEdit(recipe)}
-                                className="button-edit"
+                                className="button button-square"
                             >
                                 <FiEdit2 size={24} />
-                            </button>
-                            <button
+                            </Button>
+                            <Button
                                 onClick={() => handleDelete(recipe)}
-                                className="button-delete"
+                                className="button button-square delete"
                             >
-                                <FiTrash2 color='red' size={24} />
-                            </button>
+                                <FiTrash2 size={24} />
+                            </Button>
                         </div>
                     )}
                 </div>
-                <img
-                    src={recipe.image}
-                    alt={recipe.title}
-                    className="image"
-                />
-                <h1 className="title">{recipe.title}</h1>
-                <p className="description">{recipe.description}</p>
-
-                <div className="details">
-                    <div>
-                        <p className="label">Prep Time</p>
-                        <p className="value">{recipe.prepTime} mins</p>
-                    </div>
-                    <div>
-                        <p className="label">Cook Time</p>
-                        <p className="value">{recipe.cookTime} mins</p>
-                    </div>
-                    <div>
-                        <p className="label">Category</p>
-                        <p className="value">{recipe.category}</p>
-                    </div>
+                <div className="recipe-detail-image-container">
+                    <img
+                        src={recipe.image}
+                        alt={recipe.title}
+                        className="recipe-detail-image"
+                    />
                 </div>
+                <div className="recipe-detail-content">
+                    <h1 className="title">{recipe.title}</h1>
+                    <p className="description">{recipe.description}</p>
 
-                <h2 className="subtitle">Ingredients</h2>
-                <ul className="ingredients">
-                    {recipe.ingredients.map((ingredient, index) => (
-                        <li key={index}>
-                            {ingredient}
-                        </li>
-                    ))}
-                </ul>
+                    <div className="details">
+                        <div>
+                            <p className="label">Prep Time</p>
+                            <p className="value">{recipe.prepTime} mins</p>
+                        </div>
+                        <div>
+                            <p className="label">Cook Time</p>
+                            <p className="value">{recipe.cookTime} mins</p>
+                        </div>
+                        <div>
+                            <p className="label">Category</p>
+                            <p className="value">{recipe.category}</p>
+                        </div>
+                    </div>
 
-                <h2 className="subtitle">Instructions</h2>
-                <p className="instructions">{recipe.instructions}</p>
+                    <h2 className="subtitle">Ingredients</h2>
+                    <ul className="ingredients">
+                        {recipe.ingredients.map((ingredient, index) => (
+                            <li key={index}>
+                                {ingredient}
+                            </li>
+                        ))}
+                    </ul>
+
+                    <h2 className="subtitle">Instructions</h2>
+                    <p className="instructions">{recipe.instructions}</p>
+                </div>
             </div>
-            {editingRecipe && (
-                <RecipeModal
-                    recipe={editingRecipe}
-                    onSave={handleSave}
-                    onClose={() => setEditingRecipe(null)}
-                    isAdmin={isAdmin}
-                />
-            )}
             {isDeleteModalOpen && (
                 <div className="modal-overlay">
-                    <div className="modal-content">
-                        <h2 className="modal-title">Confirm Deletion</h2>
+                    <div className="delete-modal-content">
+                        <h2 className="delete-modal-title">Confirm Deletion</h2>
                         <p>Are you sure you want to delete this recipe?</p>
-                        <div className="modal-buttons">
-                            <button
+                        <div className="delete-modal-buttons">
+                            <Button
                                 onClick={() => setIsDeleteModalOpen(false)}
                                 className="button-cancel"
                             >
                                 Cancel
-                            </button>
-                            <button
+                            </Button>
+                            <Button
                                 onClick={confirmDelete}
                                 className="button-confirm-delete"
                             >
                                 Delete
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>
             )}
+        {recipeToEdit && (
+            <RecipeModal
+                recipe={recipeToEdit}
+                onSave={handleSave}
+                onClose={() => setRecipeToEdit(null)}
+                isAdmin={isAdmin}
+            />
+        )}
         </div>
     );
 };

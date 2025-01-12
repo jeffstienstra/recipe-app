@@ -5,7 +5,7 @@ import AdminLogin from "./pages/AdminLogin";
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
