@@ -21,7 +21,6 @@
     }
 
     .content {
-        /* margin-top: 1rem; */
         padding: 0 1rem;
 
     }
@@ -29,7 +28,6 @@
     .button-container {
         display: flex;
         justify-content: flex-end;
-        /* margin-top: 1rem; */
     }
 
     .button {

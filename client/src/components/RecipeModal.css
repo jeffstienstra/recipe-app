@@ -1,15 +1,12 @@
 .recipe-modal-overlay {
-    /* background-color: white; */
+    /* background-color: rgba(55, 65, 81, 0.5); */
     width: 100vw;
     height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    /* background-color: rgba(55, 65, 81, 0.5); */
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    /* overflow: auto; */
     z-index: 1000;
 
     .recipe-modal {
@@ -34,7 +31,7 @@
     }
 
     .modal-content {
-        padding: 1rem 1rem 1rem 1rem;
+        padding: 1rem;
         overflow-y: auto;
     }
 

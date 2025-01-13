@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './RecipeModal.css';
 
-const RecipeModal = ({ recipe, onSave, onClose }) => {
+const RecipeModal = ({recipe, onSave, onClose}) => {
     const modalTitle = recipe === 'new' ? 'Create Recipe' : 'Edit Recipe';
 
     const [formData, setFormData] = useState(

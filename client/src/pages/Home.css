@@ -21,41 +21,11 @@
         justify-content: center;
         align-items: center;
         margin: 2rem;
-        /* height: 100vh; */
     }
-    /* .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        z-index: 1000;
-    } */
 
     .focus-reset {
         display: flex;
         outline: none;
-    }
-
-
-
-    .input:focus {
-        background-color: #f3f4f6;
-    }
-
-    /* .button {
-        border-radius: 50%;
-        transition: box-shadow 0.3s ease;
-    }
-
-    .button:hover {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    } */
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-        gap: 1.5rem;
     }
 
     @media (min-width: 768px) {

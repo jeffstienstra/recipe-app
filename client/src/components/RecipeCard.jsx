@@ -1,11 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { FiEye, FiPlus } from 'react-icons/fi';
 import './RecipeCard.css';
-import {Button} from '@headlessui/react';
 
-const RecipeCard = ({ recipe }) => {
-    const navigate = useNavigate();
-
+const RecipeCard = ({recipe}) => {
     return (
             <Link to={`/recipe/${recipe?._id}`} className="recipe-card-link">
                 <div className="recipe-card">

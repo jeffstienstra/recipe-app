@@ -125,23 +125,6 @@
         border-radius: 0.5rem;
         transition: background-color 0.3s ease;
     }
-/*
-    .button-back:hover {
-        background-color: #d1d5db;
-    } */
-/*
-    .button-edit:hover, .button-delete:hover {
-        background-color: #d1d5db;
-    }
-
-    .button-cancel:hover {
-        background-color: #4b5563;
-    }
-
-    .button-confirm-delete:hover {
-        background-color: #dc2626;
-    }
- */
 
     @media (min-width: 1050px) {
         .recipe-detail-image-container {
