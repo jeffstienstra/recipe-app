@@ -1,7 +1,6 @@
 .recipe-modal-overlay {
     /* background-color: rgba(55, 65, 81, 0.5); */
     width: 100vw;
-    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -11,12 +10,8 @@
 
     .recipe-modal {
         background-color: white;
-		margin: auto 1rem;
-		display: flex;
-		flex-direction: column;
+		margin: 3rem 1rem;
 		width: 30rem;
-        height: auto;
-        max-height: 90vh;
 		min-width: 275px;
 		border-radius: 0.5rem;
 		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -37,7 +32,7 @@
 
     .modal-footer {
         display: flex;
-        padding: 1rem;
+        padding: 0 1rem 1rem 1rem;
         justify-content: flex-end;
     }
 
@@ -63,10 +58,7 @@
 
     .button-cancel {
         background-color: transparent;
-        color: #191919
-    }
-
-    .button-save {
-        margin-left: 1rem;
+        color: #191919;
+        margin-right: 1rem;
     }
 }
