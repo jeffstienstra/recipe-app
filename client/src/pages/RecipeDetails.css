@@ -1,16 +1,15 @@
 .recipe-details {
     /* color: white; */
-    /* display: flex; */
-	/* justify-content: center; */
+    display: flex;
+	justify-content: center;
+    min-width: 300px;
 
     .recipe-detail-header {
         position: relative;
 		top: 0;
         display: flex;
         justify-content: space-between;
-        /* align-items: center; */
         margin: 1rem;
-        /* padding: 1rem; */
     }
 
     .recipe-detail-image {
@@ -111,13 +110,6 @@
 
     .delete {
         margin-left: 1rem;
-    }
-
-    .button-cancel {
-        background-color: #6b7280;
-        color: white;
-        margin-right: 1.5rem;
-        transition: background-color 0.3s ease;
     }
 
     .button-confirm-delete {

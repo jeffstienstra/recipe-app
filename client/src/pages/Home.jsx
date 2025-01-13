@@ -12,11 +12,26 @@ const Home = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [isFetchingData, setIsFetchingData] = useState(false);
+    const [joke, setJoke] = useState('');
 
-    function fetchRecipes() {
+    function fetchDadJoke() {
+        fetch('https://icanhazdadjoke.com/', {
+            headers: {
+                'Accept': 'application/json',
+                'User-Agent':  'JustGiveMeTheRecipe.com',
+            },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            setJoke(data?.joke);
+            console.log(joke);
+        })
+    }
+
+    async function fetchRecipes() {
         setIsFetchingData(true);
 
-        api.get('/recipes/') // Ensure the correct backend URL
+        api.get('/recipes/')
         .then((res) => {
             setRecipes(res.data);
             setIsFetchingData(false);
@@ -28,6 +43,7 @@ const Home = () => {
     }
 
     useEffect(() => {
+        fetchDadJoke();
         fetchRecipes();
     }, []);
 
@@ -68,6 +84,8 @@ const Home = () => {
         document.querySelector('#focus-reset').focus();
     };
 
+        console.log(joke);
+
     return (
         <div className="home-container">
             <div className={(isCreateModalOpen) ? 'blur-background' : ''}>
@@ -84,9 +102,9 @@ const Home = () => {
                     <Button className='button-square' onClick={handleAdd}><FiPlus size={24} /></Button>
                 </div>
                 {isFetchingData ? (
-                    <div className="loading-container">
-                        <h1 className="">Please wait...</h1>
-                        <p className="">The database is waking up. We save energy by letting it sleep when nobody comes to visit. I know it sounds like a sad, lonely existence but databases don&apos;t mind. :)</p>
+                    <div className="loading-container justify-text">
+                        <p className="">Please enjoy a dad joke while you wait for the server to reboot...</p>
+                        <h4>{joke}</h4>
                     </div>
                 ) : (
                     <div className="grid">

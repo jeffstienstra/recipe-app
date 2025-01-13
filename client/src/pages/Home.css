@@ -16,11 +16,13 @@
     }
 
     .loading-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 2rem;
+        margin: 3rem 0;
+    }
+
+    .loading-container h4 {
+        border-top: 1px solid #d1d5db;
+        padding: 2rem 0;
+        margin: 2rem 0;
     }
 
     .focus-reset {
