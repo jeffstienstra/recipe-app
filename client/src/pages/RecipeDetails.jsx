@@ -64,12 +64,14 @@ const RecipeDetails = () => {
         };
 
         fetchRecipe();
+
     }, [id]);
 
     if (loading) {
         return (
         <div className="flex-center">
             <p>Loading...</p>
+            <Button onClick={() => navigate('/')}>Back</Button>
         </div>
         );
     }
@@ -78,6 +80,8 @@ const RecipeDetails = () => {
         return (
         <div className="flex-center">
             <p className="text-red">{error}</p>
+            <Button onClick={() => navigate('/')}>Back</Button>
+
         </div>
         );
     }
@@ -86,6 +90,7 @@ const RecipeDetails = () => {
         return (
         <div className="flex-center">
             <p>No recipe found.</p>
+            <Button onClick={() => navigate('/')}>Back</Button>
         </div>
         );
     }
@@ -157,10 +162,10 @@ const RecipeDetails = () => {
                 </div>
             </div>
             {isDeleteModalOpen && (
-                <div className="modal-overlay">
+                <div className="delete-modal-overlay">
                     <div className="delete-modal-content">
                         <h2 className="delete-modal-title">Confirm Deletion</h2>
-                        <p>Are you sure you want to delete this recipe?</p>
+                        <p>Are you sure you want to delete this recipe? This cannot be undone.</p>
                         <div className="delete-modal-buttons">
                             <Button
                                 onClick={() => setIsDeleteModalOpen(false)}

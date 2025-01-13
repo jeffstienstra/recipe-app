@@ -79,6 +79,10 @@ input, textarea, select {
     padding: 0.5rem;
 }
 
+textarea {
+    min-height: 6rem;
+}
+
 input:hover, button:hover, .button:hover {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
@@ -129,13 +133,18 @@ body {
 } */
 
 .blur-background {
-    filter: blur(5px);
+    filter: blur(25px);
     transition: filter 0.3s ease;
 }
 
 .flex-center {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+}
+
+.text-red {
+    color: #f56565;
 }

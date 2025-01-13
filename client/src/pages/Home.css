@@ -15,6 +15,14 @@
         gap: 1.5rem;
     }
 
+    .loading-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem;
+        /* height: 100vh; */
+    }
     /* .modal-overlay {
         position: fixed;
         inset: 0;

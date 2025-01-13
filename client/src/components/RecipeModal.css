@@ -14,39 +14,39 @@
 
     .recipe-modal {
         background-color: white;
-		margin: 2rem 1rem;
+		margin: auto 1rem;
 		display: flex;
 		flex-direction: column;
-		width: 50%;
+		width: 30rem;
         height: auto;
-		max-height: 90vh;
+        max-height: 90vh;
 		min-width: 275px;
-		padding: 1rem 0;
 		border-radius: 0.5rem;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
     .modal-header {
-        padding: 0 1rem;
+        color: white;
+		padding: 1rem;
+        border-radius: .5rem .5rem 0 0;
+        border-bottom: 1px solid #d1d4db;
+        background-color: #3b82f6;
     }
 
     .modal-content {
-        /* background-color: #292929; */
-        margin-bottom: 1rem;
-        padding: 1rem;
+        padding: 1rem 1rem 1rem 1rem;
         overflow-y: auto;
     }
 
     .modal-footer {
         display: flex;
-        padding: 0 1rem;
+        padding: 1rem;
         justify-content: flex-end;
     }
 
     .modal-title {
         font-size: 1.5rem;
         font-weight: bold;
-        /* margin-bottom: 1rem; */
     }
 
     .label {
@@ -55,16 +55,9 @@
     }
 
     .input, .textarea, .select {
-        /* background-color: #374151; */
         margin-bottom: 1rem;
         width: 100%;
         padding: 0.5rem;
-        /* border: 1px solid #4b5563; */
-        /* border-radius: 0.25rem; */
-    }
-
-    .textarea {
-        min-height: 4rem;
     }
 
     .notes {

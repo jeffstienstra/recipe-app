@@ -84,9 +84,9 @@ const Home = () => {
                     <Button className='button-square' onClick={handleAdd}><FiPlus size={24} /></Button>
                 </div>
                 {isFetchingData ? (
-                    <div className="flex-center my-20">
-                        <h1 className="">Please wait</h1>
-                        <p className="">We&apos;re gently waking up the database. We save energy by letting it sleep when nobody comes to visit. It sounds like a sad existence, but databases don&apos;t mind. :)</p>
+                    <div className="loading-container">
+                        <h1 className="">Please wait...</h1>
+                        <p className="">The database is waking up. We save energy by letting it sleep when nobody comes to visit. I know it sounds like a sad, lonely existence but databases don&apos;t mind. :)</p>
                     </div>
                 ) : (
                     <div className="grid">
