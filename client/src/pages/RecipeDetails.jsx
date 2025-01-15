@@ -71,7 +71,6 @@ const RecipeDetails = () => {
         return (
         <div className="flex-center">
             <p>Loading...</p>
-            <Button onClick={() => navigate('/')}>Back</Button>
         </div>
         );
     }
@@ -128,11 +127,12 @@ const RecipeDetails = () => {
                         alt={recipe.title}
                         className="recipe-detail-image"
                     />
+                    <div className="title-container">
+                        <h1 className="single-line-ellipsis">{recipe.title}</h1>
+                    </div>
                 </div>
                 <div className="recipe-detail-content">
-                    <h1 className="title">{recipe.title}</h1>
                     <p className="description">{recipe.description}</p>
-
                     <div className="details">
                         <div>
                             <p className="label">Prep Time</p>

@@ -24,22 +24,25 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
             setJoke(data?.joke);
-            console.log(joke);
         })
     }
 
     async function fetchRecipes() {
         setIsFetchingData(true);
 
-        api.get('/recipes/')
-        .then((res) => {
+        const jokeTimeout = setTimeout(() => {
+            fetchDadJoke();
+        }, 2000);
+
+        try {
+            const res = await api.get('/recipes/');
+            clearTimeout(jokeTimeout); // Clear the timeout if fetchRecipes resolves quickly
             setRecipes(res.data);
-            setIsFetchingData(false);
-        })
-        .catch((err) => {
+        } catch (err) {
             console.error(err);
-            setIsFetchingData(false);
-        });
+        } finally {
+            // setIsFetchingData(false);
+        }
     }
 
     useEffect(() => {
@@ -99,7 +102,11 @@ const Home = () => {
                             onChange={handleSearchChange}
                         />
                     </div>
-                    <Button className='button-square' onClick={handleAdd}><FiPlus size={24} /></Button>
+                    <Button
+                        className='button-square'
+                        onClick={handleAdd}>
+                            <FiPlus size={24} />
+                    </Button>
                 </div>
                 {isFetchingData ? (
                     <div className="loading-container justify-text">

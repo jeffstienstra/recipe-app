@@ -7,10 +7,6 @@
     text-decoration: none;
     color: inherit;
 
-    .recipe-card-link:hover {
-        text-decoration: none;
-    }
-
     img {
         width: 100%;
         height: 10rem;
@@ -32,10 +28,6 @@
 
     .button {
         margin: 0 1rem 1rem 1rem;
-    }
-
-    .title {
-        font-size: 1.25rem;
     }
 
     .details {
@@ -64,5 +56,9 @@
 
     .view-recipe:hover {
         background-color: #2563eb;
+    }
+
+    .recipe-card-link:hover {
+        text-decoration: none;
     }
 }

@@ -10,7 +10,7 @@ const RecipeCard = ({recipe}) => {
                         alt={recipe?.title}
                     />
                     <div className="content">
-                        <h2 className="title">{recipe?.title}</h2>
+                        <h1 className="title single-line-ellipsis">{recipe?.title}</h1>
                         <div className="details">
                             <p>{recipe?.category}</p>
                             <p>{`Prep Time: ${recipe?.prepTime}`}</p>
