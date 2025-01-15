@@ -41,7 +41,7 @@ const Home = () => {
         } catch (err) {
             console.error(err);
         } finally {
-            // setIsFetchingData(false);
+            setIsFetchingData(false);
         }
     }
 
@@ -91,6 +91,10 @@ const Home = () => {
 
     return (
         <div className="home-container">
+            <button popovertarget="my-popover" popovertargetaction>Open Popover</button>
+
+            <div id="my-popover" popover='auto'>Greetings, one and all!</div>
+
             <div className={(isCreateModalOpen) ? 'blur-background' : ''}>
                 <div className="header-container">
                     <div id='focus-reset' tabIndex="-1" className="focus-reset">
