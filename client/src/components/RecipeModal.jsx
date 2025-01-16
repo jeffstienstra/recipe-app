@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import './RecipeModal.css';
 
 const RecipeModal = ({recipe, onSave, onClose}) => {

@@ -82,6 +82,7 @@
     }
 
     .ingredients, .instructions {
+        white-space: pre-wrap;
         margin-bottom: 1.5rem;
     }
 

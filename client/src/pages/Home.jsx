@@ -46,7 +46,6 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetchDadJoke();
         fetchRecipes();
     }, []);
 
@@ -109,10 +108,15 @@ const Home = () => {
                     </Button>
                 </div>
                 {isFetchingData ? (
-                    <div className="loading-container justify-text">
-                        <p className="">Please enjoy a dad joke while you wait for the server to reboot...</p>
-                        <h4>{joke}</h4>
-                    </div>
+                    <>
+                        <p>The server is starting up...</p>
+                        {joke && (
+                            <div className="loading-container">
+                                <p>Hey, have you heard this one?</p>
+                                <h4>{joke}</h4>
+                            </div>
+                        )}
+                    </>
                 ) : (
                     <div className="grid">
                         {filteredRecipes?.map((recipe) => (
