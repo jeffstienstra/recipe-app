@@ -7,13 +7,15 @@ import RecipeCard from "../components/RecipeCard";
 import { Input } from '@headlessui/react'
 
 const Home = () => {
-    const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
+    const [isUser, setIsUser] = useState(null); // Replace with auth check
     const [recipes, setRecipes] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [isFetchingData, setIsFetchingData] = useState(false);
     const [joke, setJoke] = useState('');
 
     useEffect(() => {
+        setIsUser(false); // Replace with user auth check
+
         function fetchDadJoke() {
             fetch('https://icanhazdadjoke.com/', {
                 headers: {
@@ -75,7 +77,9 @@ const Home = () => {
                         onChange={handleSearchChange}
                     />
                 </div>
-                <Link to={'/recipe/new'} className="button button-square"><FiPlus size={24} /></Link>
+                {!isUser && (
+                    <Link to={'/recipe/new'} className="button button-square"><FiPlus size={24} /></Link>
+                )}
             </div>
             {isFetchingData ? (
                 <>
