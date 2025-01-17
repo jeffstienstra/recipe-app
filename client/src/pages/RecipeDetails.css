@@ -67,7 +67,9 @@
     }
 
     input:focus + .slider {
-        box-shadow: 0 0 1px #3B82F6;
+        /* border: 1px solid #3B82F6; */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        outline: -webkit-focus-ring-color auto 1px;;
     }
 
     input:checked + .slider:before {
