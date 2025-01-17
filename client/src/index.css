@@ -93,6 +93,7 @@ button, .button {
 }
 
 .button-square {
+    height: 40px;
     padding: 0.5rem;
 }
 

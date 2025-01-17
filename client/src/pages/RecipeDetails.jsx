@@ -14,6 +14,7 @@ const RecipeDetails = () => {
     const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [recipeToDelete, setRecipeToDelete] = useState(null);
+    const [wakeLock, setWakeLock] = useState(null);
 
     const handleDelete = (recipe) => {
         setRecipeToDelete(recipe);
@@ -50,10 +51,8 @@ const RecipeDetails = () => {
         fetchRecipe();
     }, [id]);
 
-    const [wakeLock, setWakeLock] = useState(null);
-
 	useEffect(() => {
-		// Clean up the wake lock when the component is unmounted or wakeLock changes
+		// Clean up wake lock on change or when component unmounts
 		return () => {
 			if (wakeLock) {
 				wakeLock.release()
@@ -68,11 +67,14 @@ const RecipeDetails = () => {
 
 	const toggleWakeLock = async () => {
 		if (wakeLock) {
+            console.log('wakelock:', wakeLock);
 			await wakeLock.release();
 			setWakeLock(null);
 		} else {
 			try {
 				const newWakeLock = await navigator.wakeLock.request('screen');
+            console.log('newWakeLock:', newWakeLock);
+
 				setWakeLock(newWakeLock);
 			} catch (error) {
 				console.error('Failed to enable wake lock', error);
@@ -117,27 +119,45 @@ const RecipeDetails = () => {
                     >
                         <FiArrowLeft size={24} />
                     </Button>
-                    {!isAdmin && (
+                            <div className="cook-mode-container">
+                                <label htmlFor="cook-mode-toggle"  className='cook-mode-title'>Cook Mode</label>
+                                <div className="cook-mode-toggle" role="group" aria-labelledby="cook-mode-toggle">
+                                    <h4 aria-hidden="true">Off</h4>
+                                    <label className="switch">
+                                        <input
+                                            id="cook-mode-toggle"
+                                            type="checkbox"
+                                            checked={!!wakeLock}
+                                            onChange={toggleWakeLock}
+                                            aria-label='Toggle cook mode'
+                                        />
+                                        <span className="slider round"></span>
+                                    </label>
+                                    <h4 aria-hidden="true">On</h4>
+                                </div>
+                            </div>
                         <div className="actions">
-                            <Button onClick={toggleWakeLock} className="button button-square">
-                                {wakeLock ? 'Disable Wake Lock' : 'Enable Wake Lock'}
-                            </Button>
-                            <Link
-                                to={`/recipe/edit/${recipe._id}`}
-                                // onClick={() => handleEdit(recipe)}
-                                state={recipe}
-                                className="button button-square"
-                            >
-                                <FiEdit2 size={24} />
-                            </Link>
-                            <Button
-                                onClick={() => handleDelete(recipe)}
-                                className="button button-square delete"
-                            >
-                                <FiTrash2 size={24} />
-                            </Button>
+                            {!isAdmin && (
+                                <>
+                                    <Link
+                                        to={`/recipe/edit/${recipe._id}`}
+                                        // onClick={() => handleEdit(recipe)}
+                                        state={recipe}
+                                        className="button button-square"
+                                        aria-label="Edit recipe"
+                                    >
+                                        <FiEdit2 size={24} />
+                                    </Link>
+                                    <Button
+                                        onClick={() => handleDelete(recipe)}
+                                        className="button button-square delete"
+                                        aria-label="Delete recipe"
+                                    >
+                                        <FiTrash2 size={24} />
+                                    </Button>
+                                </>
+                            )}
                         </div>
-                    )}
                 </div>
                 <div className="recipe-detail-image-container">
                     <img
