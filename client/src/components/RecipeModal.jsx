@@ -1,11 +1,17 @@
 import {useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {TfiClose} from 'react-icons/tfi';
+import api from "../utils/api";
 import './RecipeModal.css';
 
-const RecipeModal = ({recipe, onSave, onClose}) => {
-    const modalTitle = recipe === 'new' ? 'Create Recipe' : 'Edit Recipe';
-
+const RecipeModal = () => {
+    const location = useLocation();
+    const recipe = location.state;
+    console.log('recipe', recipe);
+    const navigate = useNavigate();
+    const modalTitle = recipe === null ? 'Create Recipe' : 'Edit Recipe';
     const [formData, setFormData] = useState(
-        recipe === 'new' ? {
+        (recipe === null) ? {
             title: '',
             description: '',
             cookTime: '',
@@ -30,18 +36,45 @@ const RecipeModal = ({recipe, onSave, onClose}) => {
             notes: recipe.notes || '',
         }
     );
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+    const updateRecipe = (updatedRecipe) => {
+        api.put(`/recipes/${updatedRecipe._id}`, updatedRecipe) // Ensure the correct backend URL
+        .then(() => {
+            navigate(`/recipe/${updatedRecipe._id}`);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+    };
+
+    const saveNewRecipe = (newRecipe) => {
+        api.post('/recipes/', newRecipe)
+        .then((res) => {
+            console.log('res.data', res.data);
+            navigate(`/recipe/${res?.data?._id}`);
+        })
+        .catch((err) => {
+            console.error(err);
+            // navigate('/');
+        });
+    };
+
+    const handleClose = () => {
+        console.log('recipe', recipe);
+        recipe === null ? navigate('/') : navigate(`/recipe/${recipe._id}`);
+    }
 
     const handleSave = () => {
         const updatedRecipe = {
             ...formData,
             ingredients: formData.ingredients.split(',').map(ingredient => ingredient.trim())
         };
-        onSave(updatedRecipe);
+        console.log('updatedRecipe', updatedRecipe);
+        recipe === null ? saveNewRecipe(updatedRecipe) : updateRecipe(updatedRecipe)
     };
 
     return (
@@ -49,6 +82,12 @@ const RecipeModal = ({recipe, onSave, onClose}) => {
             <div className="recipe-modal">
                 <div className="modal-header">
                     <h2 className="modal-title">{modalTitle}</h2>
+                    <button
+                        onClick={handleClose}
+                        className="button button-square"
+                        >
+                        <span><TfiClose size={24} /></span>
+                    </button>
                 </div>
                 <div className="modal-content">
                     <label htmlFor="title" className="label">Title</label>
@@ -148,7 +187,7 @@ const RecipeModal = ({recipe, onSave, onClose}) => {
                 </div>
                 <div className="modal-footer">
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="button button-cancel"
                         >
                         Cancel

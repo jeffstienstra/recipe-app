@@ -18,6 +18,8 @@
     }
 
     .modal-header {
+        display: flex;
+        justify-content: space-between;
         color: white;
 		padding: 1rem;
         border-radius: .5rem .5rem 0 0;
@@ -39,8 +41,12 @@
     .modal-title {
         font-size: 1.5rem;
         font-weight: bold;
+        align-content: center;
     }
 
+    .button-square {
+        height: 40px;
+    }
     .label {
         display: block;
         font-weight: 600;

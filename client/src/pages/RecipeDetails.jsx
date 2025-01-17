@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FiEdit2, FiArrowLeft, FiTrash2 } from "react-icons/fi";
 import api from "../utils/api";
-import RecipeModal from "../components/RecipeModal";
 import './RecipeDetails.css';
 import {Button} from "@headlessui/react";
 
@@ -12,12 +11,9 @@ const RecipeDetails = () => {
     const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [recipeToEdit, setRecipeToEdit] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [recipeToDelete, setRecipeToDelete] = useState(null);
-
-    const handleEdit = (recipe) => setRecipeToEdit(recipe);
 
     const handleDelete = (recipe) => {
         setRecipeToDelete(recipe);
@@ -38,34 +34,51 @@ const RecipeDetails = () => {
         });
     };
 
-    const handleSave = (updatedRecipe) => {
-        api.put(`/recipes/${updatedRecipe._id}`, updatedRecipe) // Ensure the correct backend URL
-        .then(() => {
-            setRecipe(updatedRecipe);
-            setRecipeToEdit(null);
-        })
-        .catch((err) => {
-            console.error(err);
-            setRecipeToEdit(null);
-        });
-    };
-
     useEffect(() => {
         const fetchRecipe = async () => {
-        try {
-            const res = await api.get(`/recipes/${id}`);
-            setRecipe(res.data);
-            setLoading(false);
-        } catch (err) {
-            console.error(err);
-            setError("Failed to fetch recipe details.");
-            setLoading(false);
-        }
+            try {
+                const res = await api.get(`/recipes/${id}`);
+                setRecipe(res.data);
+                setLoading(false);
+            } catch (err) {
+                console.error(err);
+                setError("Failed to fetch recipe details.");
+                setLoading(false);
+            }
         };
 
         fetchRecipe();
-
     }, [id]);
+
+    const [wakeLock, setWakeLock] = useState(null);
+
+	useEffect(() => {
+		// Clean up the wake lock when the component is unmounted or wakeLock changes
+		return () => {
+			if (wakeLock) {
+				wakeLock.release()
+					.then(() => {
+						console.log('Wake Lock released');
+						setWakeLock(null);
+					})
+					.catch((error) => console.error('Failed to release wake lock', error));
+			}
+		};
+	}, [wakeLock]);
+
+	const toggleWakeLock = async () => {
+		if (wakeLock) {
+			await wakeLock.release();
+			setWakeLock(null);
+		} else {
+			try {
+				const newWakeLock = await navigator.wakeLock.request('screen');
+				setWakeLock(newWakeLock);
+			} catch (error) {
+				console.error('Failed to enable wake lock', error);
+			}
+		}
+	};
 
     if (loading) {
         return (
@@ -96,7 +109,7 @@ const RecipeDetails = () => {
 
     return (
         <div className="recipe-details">
-            <div className={(isDeleteModalOpen || recipeToEdit) ? 'blur-background' : ''}>
+            <div className={(isDeleteModalOpen) ? 'blur-background' : ''}>
                 <div className="recipe-detail-header">
                     <Button
                         onClick={() => navigate('/')}
@@ -106,12 +119,17 @@ const RecipeDetails = () => {
                     </Button>
                     {!isAdmin && (
                         <div className="actions">
-                            <Button
-                                onClick={() => handleEdit(recipe)}
+                            <Button onClick={toggleWakeLock} className="button button-square">
+                                {wakeLock ? 'Disable Wake Lock' : 'Enable Wake Lock'}
+                            </Button>
+                            <Link
+                                to={`/recipe/edit/${recipe._id}`}
+                                // onClick={() => handleEdit(recipe)}
+                                state={recipe}
                                 className="button button-square"
                             >
                                 <FiEdit2 size={24} />
-                            </Button>
+                            </Link>
                             <Button
                                 onClick={() => handleDelete(recipe)}
                                 className="button button-square delete"
@@ -183,14 +201,6 @@ const RecipeDetails = () => {
                     </div>
                 </div>
             )}
-        {recipeToEdit && (
-            <RecipeModal
-                recipe={recipeToEdit}
-                onSave={handleSave}
-                onClose={() => setRecipeToEdit(null)}
-                isAdmin={isAdmin}
-            />
-        )}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 body {
     /* color: white; */
-    /* background-color: #121212; */
+    background-color:rgb(252, 243, 232);
 
     font-family: 'Inter', sans-serif;
     /* font-size: 16px; */
@@ -63,6 +63,11 @@ input:hover, button:hover, textarea:hover, .button:hover, select:hover {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
+.card-with-box-shadow {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 button:hover, .button:hover {
     filter: brightness(110%);
 }
@@ -104,7 +109,7 @@ button, .button {
 }
 
 .blur-background {
-    filter: blur(25px);
+    filter: blur(15px);
     transition: filter 0.3s ease;
 }
 
