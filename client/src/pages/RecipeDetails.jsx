@@ -8,21 +8,21 @@ import {Button} from "@headlessui/react";
 const RecipeDetails = () => {
     const navigate = useNavigate();
     const { id } = useParams(); // Extract recipe ID from URL
-    const [recipe, setRecipe] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isAdmin, setIsAdmin] = useState(false); // Replace with auth check
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [recipeToDelete, setRecipeToDelete] = useState(null);
+    const [isUser, setIsUser] = useState(null); // Replace with auth check
+    const [recipe, setRecipe] = useState(null);
+    // const [recipeToDelete, setRecipeToDelete] = useState(null);
     const [wakeLock, setWakeLock] = useState(null);
 
     const handleDelete = (recipe) => {
-        setRecipeToDelete(recipe);
+        // setRecipeToDelete(recipe);
         setIsDeleteModalOpen(true);
     };
 
     const confirmDelete = () => {
-        api.delete(`/recipes/${recipeToDelete._id}`) // Ensure the correct backend URL
+        api.delete(`/recipes/${recipe._id}`) // Ensure the correct backend URL
         .then(() => {
             navigate('/');
         })
@@ -31,11 +31,12 @@ const RecipeDetails = () => {
         })
         .finally(() => {
             setIsDeleteModalOpen(false);
-            setRecipeToDelete(null);
+            // setRecipeToDelete(null);
         });
     };
 
     useEffect(() => {
+        setIsUser(false); // Replace with user auth check
         const fetchRecipe = async () => {
             try {
                 const res = await api.get(`/recipes/${id}`);
@@ -49,7 +50,7 @@ const RecipeDetails = () => {
         };
 
         fetchRecipe();
-    }, [id]);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		// Clean up wake lock on change or when component unmounts
@@ -119,25 +120,29 @@ const RecipeDetails = () => {
                     >
                         <FiArrowLeft size={24} />
                     </Button>
-                            <div className="cook-mode-container">
-                                <label htmlFor="cook-mode-toggle"  className='cook-mode-title'>Cook Mode</label>
-                                <div className="cook-mode-toggle" role="group" aria-labelledby="cook-mode-toggle">
-                                    <h4 aria-hidden="true">Off</h4>
-                                    <label className="switch">
-                                        <input
-                                            id="cook-mode-toggle"
-                                            type="checkbox"
-                                            checked={!!wakeLock}
-                                            onChange={toggleWakeLock}
-                                            aria-label='Toggle cook mode'
-                                        />
-                                        <span className="slider round"></span>
-                                    </label>
-                                    <h4 aria-hidden="true">On</h4>
-                                </div>
+                        <div className="cook-mode-container">
+                            <label htmlFor="cook-mode-toggle"  className='cook-mode-title'>Cook Mode</label>
+                            <div className="cook-mode-toggle" role="group" aria-labelledby="cook-mode-toggle">
+                                <h4 aria-hidden="true">Off</h4>
+                                <label className="switch">
+                                    <input
+                                        id="cook-mode-toggle"
+                                        type="checkbox"
+                                        checked={!!wakeLock}
+                                        onChange={toggleWakeLock}
+                                        aria-label='Toggle cook mode'onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                toggleWakeLock();
+                                            }
+                                        }}
+                                    />
+                                    <span className="slider round"></span>
+                                </label>
+                                <h4 aria-hidden="true">On</h4>
                             </div>
+                        </div>
                         <div className="actions">
-                            {!isAdmin && (
+                            {!isUser && (
                                 <>
                                     <Link
                                         to={`/recipe/edit/${recipe._id}`}
