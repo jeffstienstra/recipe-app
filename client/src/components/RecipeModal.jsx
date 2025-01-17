@@ -86,7 +86,7 @@ const RecipeModal = () => {
                         onClick={handleClose}
                         className="button button-square"
                         >
-                        <span><TfiClose size={24} /></span>
+                        <span className='close-icon'><TfiClose size={24} /></span>
                     </button>
                 </div>
                 <div className="modal-content">

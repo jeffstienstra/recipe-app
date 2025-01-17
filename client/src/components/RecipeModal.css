@@ -44,6 +44,10 @@
         align-content: center;
     }
 
+    .close-icon {
+        height: 100%;
+    }
+
     .button-square {
         height: 40px;
     }
