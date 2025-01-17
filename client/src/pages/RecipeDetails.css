@@ -5,10 +5,17 @@
     min-width: 18rem;
     max-width: 60rem;
     margin: 0 auto;
-    padding-top: 1rem;
     border-radius: 0.5rem;
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    .recipe-detail-header {
+        position: relative;
+		top: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+    }
 
     .cook-mode-container {
         display: flex;
@@ -79,13 +86,6 @@
 
 
 
-    .recipe-detail-header {
-        position: relative;
-		top: 0;
-        display: flex;
-        justify-content: space-between;
-        margin: 0 1rem 1rem 1rem;
-    }
 
     .recipe-detail-image {
         width: 100%;
@@ -96,7 +96,7 @@
     }
 
     .recipe-detail-content {
-        margin-top: 3rem;
+        /* margin-top: 3rem; */
         padding: 1.5rem;
     }
 

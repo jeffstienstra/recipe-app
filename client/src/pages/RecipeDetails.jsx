@@ -13,11 +13,9 @@ const RecipeDetails = () => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isUser, setIsUser] = useState(null); // Replace with auth check
     const [recipe, setRecipe] = useState(null);
-    // const [recipeToDelete, setRecipeToDelete] = useState(null);
     const [wakeLock, setWakeLock] = useState(null);
 
-    const handleDelete = (recipe) => {
-        // setRecipeToDelete(recipe);
+    const handleDelete = () => {
         setIsDeleteModalOpen(true);
     };
 
@@ -31,7 +29,6 @@ const RecipeDetails = () => {
         })
         .finally(() => {
             setIsDeleteModalOpen(false);
-            // setRecipeToDelete(null);
         });
     };
 
